@@ -482,7 +482,7 @@ tag "mplayer" do
 end
 
 tag "stick" do
-   match  "dialog|subtly|python|gtk.rb|display|pychrom|skype|xev"
+   match  "dialog|subtly|python|gtk.rb|display|pychrom|xev"
    stick  true
    float  true
 end
@@ -553,7 +553,9 @@ tag "chrome-opts" do
 end
 
 # Simple tags
-tag "chat",    "skype|pidgin"
+tag "chat" do
+   match [ :class, :name ] => "skype|pidgin"
+end
 tag "entertainement", "mocp"
 
 # Placement
