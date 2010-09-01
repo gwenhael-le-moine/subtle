@@ -1,7 +1,13 @@
+# coding: utf-8
 #
 # Author::  Gwenhael Le Moine
 # License:: GNU GPL
 #
+
+#Reference:
+# * unexist's config @ http://hg.subforge.org/dotfiles/
+
+require "/usr/share/subtle/subtle-contrib/ruby/launcher.rb"
 
 #
 # == Options
@@ -275,24 +281,24 @@ grab "C-W-r", :WindowRaise
 grab "C-W-l", :WindowLower
 
 # Select next windows
-grab "W-Left",  :WindowLeft
-grab "W-Down",  :WindowDown
-grab "W-Up",    :WindowUp
-grab "W-Right", :WindowRight
+grab "A-Left",  :WindowLeft
+grab "A-Down",  :WindowDown
+grab "A-Up",    :WindowUp
+grab "A-Right", :WindowRight
 
 # Kill current window
 grab "W-C-q", :WindowKill
 
 # Cycle between given gravities
-grab "W-A-q", [ :top_left,     :top_left66,     :top_left33     ]
-grab "W-A-w", [ :top,          :top66,          :top33          ]
-grab "W-A-e", [ :top_right,    :top_right66,    :top_right33    ]
-grab "W-A-a", [ :left,         :left66,         :left33         ]
-grab "W-A-s", [ :center,       :center66,       :center33       ]
-grab "W-A-d", [ :right,        :right66,        :right33        ]
-grab "W-A-z", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
-grab "W-A-x", [ :bottom,       :bottom66,       :bottom33       ]
-grab "W-A-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
+#grab "W-A-q", [ :top_left,     :top_left66,     :top_left33     ]
+grab "W-Up", [ :top,          :top66,          :top33          ]
+#grab "W-A-e", [ :top_right,    :top_right66,    :top_right33    ]
+grab "W-Left", [ :left,         :left66,         :left33         ]
+#grab "W-A-s", [ :center,       :center66,       :center33       ]
+grab "W-Right", [ :right,        :right66,        :right33        ]
+#grab "W-A-z", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
+grab "W-Down", [ :bottom,       :bottom66,       :bottom33       ]
+#grab "W-A-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
@@ -322,17 +328,20 @@ grab "W-Return"             , "Terminal"
 grab "W-e"                  , "/home/cycojesus/bin/emacs-dwim.sh"
 grab "W-m"                  , "uxterm -e mocp"
 grab "W-r"                  , "dmenu_run"
+grab "W-S-R" do
+   Launcher::Launcher.instance.run
+end
 grab "W-t"                  , "Terminal"
 grab "W-x"                  , "ps aux | grep -v grep | grep xcompmgr -q && killall xcompmgr || xcompmgr -C -c"
 grab "C-W-x"                , "mocp -P; xlock -mode blank"
 
-grab "XF86AudioMute"        , "amixer set Master toggle" 
-grab "XF86AudioRaiseVolume" , "amixer set Master 2dB+" 
-grab "XF86AudioLowerVolume" , "amixer set Master 2dB-" 
-grab "XF86AudioPlay"        , "mocp -G" 
-grab "XF86AudioStop"        , "mocp -s" 
-grab "XF86AudioPrev"        , "mocp -r" 
-grab "XF86AudioNext"        , "mocp -f" 
+grab "XF86AudioMute"        , "amixer set Master toggle"
+grab "XF86AudioRaiseVolume" , "amixer set Master 2dB+"
+grab "XF86AudioLowerVolume" , "amixer set Master 2dB-"
+grab "XF86AudioPlay"        , "mocp -G"
+grab "XF86AudioStop"        , "mocp -s"
+grab "XF86AudioPrev"        , "mocp -r"
+grab "XF86AudioNext"        , "mocp -f"
 #
 # == Tags
 #
@@ -467,7 +476,7 @@ tag "stick" do
 end
 
 tag "float" do
-  match "display"
+  match :class => "qemu|MPlayer|Wicd-client\.py|pinentry"
   float true
 end
 
@@ -550,4 +559,33 @@ end
 #   end
 #
 
-# vim:ts=2:bs=2:sw=2:et:fdm=marker
+on :tile do
+   clients = Subtlext::View.current.clients
+   screen  = Subtlext::Screen.current
+   
+   assoc = {}
+   
+   clients.each do |c|
+      begin
+         assoc[c.gravity.id] << c rescue assoc[c.gravity.id] = [ c ]
+      rescue StandardError
+         # Startup errors
+      end
+   end
+   
+   assoc.each do |k, v|
+      g      = Subtlext::Gravity[k]
+      border = 2 #< Currently hardcoded
+      
+      # Calculate gravity
+      x, y, w, h = g.geometry_for(screen)
+      width      = w / v.size
+      pos        = x
+      
+      v.each do |c|
+         c.resize   = false
+         c.geometry = [ pos, y, width - 2 * border, h - 2 * border ]
+         pos += width
+      end
+   end
+end
