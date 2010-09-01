@@ -7,42 +7,21 @@
 #Reference:
 # * unexist's config @ http://hg.subforge.org/dotfiles/
 
+require "socket"
 require "/usr/share/subtle/subtle-contrib/ruby/launcher.rb"
 
-#
+hostname = Socket.gethostname
+
 # == Options
-#
-# Following options change behaviour and sizes of the window manager:
-#
-# Border size in pixel of the windows
 set :border, 2
-
-# Window move/resize steps in pixel per keypress
 set :step, 5
-
-# Window screen border snapping
 set :snap, 10
-
-# Default starting gravity for windows (0 = gravity of last client)
 set :gravity, :center
-
-# Make transient windows urgent
-set :urgent, false
-
-# Enable respecting of size hints globally
+set :urgent, true
 set :resize, true
-
-# Honor randr (doesn't work with nvidia)
 set :randr, true
-
-# Screen size padding (left, right, top, bottom)
 set :padding, [ 0, 0, 0, 0 ]
-
-# Font string either take from e.g. xfontsel or use xft
-#set :font, "-*-*-medium-*-*-*-14-*-*-*-*-*-*-*"
-set :font, "xft:sans-8"
-
-# Space around windows
+set :font, "xft:Envy Code R:pixelsize=12"
 set :gap, 0
 
 #
@@ -66,7 +45,7 @@ set :gap, 0
 # [*:separator*] Insert separator
 #
 # Content of the top panel
-set :top, [ :views, :title, :spacer, :tray, :sublets ]
+set :top, [:views, :spacer, :title, :spacer, :sublets, :spacer, :scratchpad, :tray]
 
 # Content of the bottom panel
 set :bottom, [ ]
@@ -75,7 +54,7 @@ set :bottom, [ ]
 set :stipple, false
 
 # Separator between sublets
-set :separator, "|"
+set :separator, ""
 
 # Outline border size in pixel of panel items
 set :outline, 0
@@ -441,10 +420,139 @@ grab "XF86AudioNext"        , "mocp -f"
 #              Example: urgent true
 #
 
+# == Tags
+tag "terms" do
+   match    "Terminal"
+   # gravity  :center
+   # screen   1
+end
+
+tag "browser" do
+   match  "browser|navigator|midori|namoroka|firefox|chrome|chromium"
+   screen 1
+
+   # if("proteus" == host)
+   #    gravity :top75
+   # else
+   #    gravity :center
+   # end
+end
+
+tag "pdf" do
+   match    "apvlv|evince"
+   stick    true
+   screen   0
+end
+
+tag "editor" do
+   match   "emacs.*"
+   screen  1
+   resize  false
+
+   # if("mockra" == host or "proteus" == host)
+   #    gravity :top75
+   # else
+   #    gravity :center
+   # end
+end
+
+tag "xephyr" do
+   match    "xephyr"
+   screen   0
+
+   # if("mockra" == host)
+   #    gravity  :center
+   # else
+   #    geometry [857, 96, 800, 800]
+   # end
+end
+
+tag "android" do
+   match    :name => "5554:AVD"
+   screen   0
+   geometry [ 873, 47, 791, 534 ]
+end
+
+tag "mplayer" do
+   match   "mplayer"
+   stick   true
+   float   true
+   urgent  true
+   screen  1
+end
+
+tag "stick" do
+   match  "dialog|subtly|python|gtk.rb|display|pychrom|skype|xev"
+   stick  true
+   float  true
+end
+
+tag "void" do
+   match   "jd-Main|Virtualbox"
+   screen  1
+end
+
+tag "test" do
+   match   "test"
+   float   true
+   resize  false
+end
+
+tag "one" do
+   match    "urxvt2"
+   gravity  :bottom_left
+   screen   0
+end
+
+tag "two" do
+   match    "urxvt2"
+   gravity  :bottom
+   screen   0
+end
+
+tag "six" do
+   match    "navigator"
+   gravity  :right
+   screen   0
+end
+
+tag "seven" do
+   match    "urxvt1"
+   gravity  :top_left
+   screen   0
+end
+
+tag "eight" do
+   match    "urxvt1"
+   gravity  :top
+   screen   0
+end
+
+tag "one25" do
+   match    "urxvt2"
+   gravity  :bottom_left25
+   screen   0
+end
+
+tag "three25" do
+   match    "urxvt1"
+   gravity  :bottom_right25
+   screen   0
+end
+
+tag "xev" do
+   match    :name => "Event Tester"
+   geometry [ 1000, 100, 80, 80 ]
+   float    true
+   stick    true
+end
+
+tag "chrome-opts" do
+   match :name => "chromium options"
+   stick true
+end
+
 # Simple tags
-tag "terms",   "xterm|[u]?rxvt|Terminal"
-tag "browser", "uzbl|opera|firefox|navigator"
-tag "emacs",   "Emacs"
 tag "chat",    "skype|pidgin"
 tag "entertainement", "mocp"
 
@@ -454,27 +562,7 @@ tag "editor" do
   resize true
 end
 
-tag "fixed" do
-  geometry [ 10, 10, 100, 100 ]
-  stick    true
-end
-
-tag "resize" do
-  match  "sakura|gvim"
-  resize true
-end
-
-tag "gravity" do
-  gravity :center
-end
-
 # Modes
-tag "stick" do
-  match "mplayer"
-  float true
-  stick true
-end
-
 tag "float" do
   match :class => "qemu|MPlayer|Wicd-client\.py|pinentry"
   float true
@@ -514,12 +602,32 @@ end
 #              will only be visible when there is a client on it.
 #
 
+terms  = "terms"
+www    = "browser"
+void   = "xephyr|default|void|gimp_.*"
+editor = "android|editor"
+chat   = "chat"
+entertainement = "entertainement"
+
+# # Host specific
+# if("telas" == host) #< Multihead
+#    terms  << "|eight|two"
+#    www    << "|eight|two"
+#    void   << "|eight|two"
+#    editor << "|seven|one|six|xephyr"
+# elsif("mockra" == host or "proteus" == host)
+#    terms  << "|eight|two"
+#    www    << "|one25|three25"
+#    editor << "|one25|three25"
+# end
+
 # Simple views
-view "T", "terms"
-view "W", "browser|default|gimp_.*"
-view "E", "editor"
-view "C", "chat"
-view "M", "entertainement"
+view "T", terms
+view "W", www
+view "E", editor
+view "C", chat
+view "M", entertainement
+view "V", void
 
 # Dynamic views
 view "temp" do
