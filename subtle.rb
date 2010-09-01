@@ -1,15 +1,6 @@
 #
-# Author::  Christoph Kappel <unexist@dorfelite.net>
-# Version:: $Id$
+# Author::  Gwenhael Le Moine
 # License:: GNU GPL
-#
-# = Subtle example configuration
-#
-# This file will be installed as default and can also be used as a starter for
-# an own custom configuration file. The system wide config usually resides in
-# +/etc/xdg/subtle+ and the user config in +HOME/.config/subtle+, both locations
-# are dependent on the locations specified by +XDG_CONFIG_DIRS+ and 
-# +XDG_CONFIG_HOME+.
 #
 
 #
