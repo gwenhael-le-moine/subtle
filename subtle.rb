@@ -24,7 +24,7 @@ set :gravity, :center
 set :urgent, false
 
 # Enable respecting of size hints globally
-set :resize, false
+set :resize, true
 
 # Honor randr (doesn't work with nvidia)
 set :randr, true
@@ -318,13 +318,21 @@ grab "A-Tab" do |c|
 end
 
 # Exec programs
-grab "W-e", "/home/cycojesus/bin/emacs-dwim.sh"
-grab "W-m", "uxterm -e mocp"
-grab "W-r", "dmenu_run"
-grab "W-t", "Terminal"
-grab "W-x", "ps aux | grep -v grep | grep xcompmgr -q && killall xcompmgr || xcompmgr -C -c"
-grab "C-W-x", "mocp -P; xlock -mode blank"
+grab "W-Return"             , "Terminal"
+grab "W-e"                  , "/home/cycojesus/bin/emacs-dwim.sh"
+grab "W-m"                  , "uxterm -e mocp"
+grab "W-r"                  , "dmenu_run"
+grab "W-t"                  , "Terminal"
+grab "W-x"                  , "ps aux | grep -v grep | grep xcompmgr -q && killall xcompmgr || xcompmgr -C -c"
+grab "C-W-x"                , "mocp -P; xlock -mode blank"
 
+grab "XF86AudioMute"        , "amixer set Master toggle" 
+grab "XF86AudioRaiseVolume" , "amixer set Master 2dB+" 
+grab "XF86AudioLowerVolume" , "amixer set Master 2dB-" 
+grab "XF86AudioPlay"        , "mocp -G" 
+grab "XF86AudioStop"        , "mocp -s" 
+grab "XF86AudioPrev"        , "mocp -r" 
+grab "XF86AudioNext"        , "mocp -f" 
 #
 # == Tags
 #
