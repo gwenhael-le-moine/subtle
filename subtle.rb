@@ -669,33 +669,33 @@ end
 #   end
 #
 
-on :tile do
-   clients = Subtlext::View.current.clients
-   screen  = Subtlext::Screen.current
+# on :tile do
+#    clients = Subtlext::View.current.clients
+#    screen  = Subtlext::Screen.current
    
-   assoc = {}
+#    assoc = {}
    
-   clients.each do |c|
-      begin
-         assoc[c.gravity.id] << c rescue assoc[c.gravity.id] = [ c ]
-      rescue StandardError
-         # Startup errors
-      end
-   end
+#    clients.each do |c|
+#       begin
+#          assoc[c.gravity.id] << c rescue assoc[c.gravity.id] = [ c ]
+#       rescue StandardError
+#          # Startup errors
+#       end
+#    end
    
-   assoc.each do |k, v|
-      g      = Subtlext::Gravity[k]
-      border = 2 #< Currently hardcoded
+#    assoc.each do |k, v|
+#       g      = Subtlext::Gravity[k]
+#       border = 2 #< Currently hardcoded
       
-      # Calculate gravity
-      x, y, w, h = g.geometry_for(screen)
-      width      = w / v.size
-      pos        = x
+#       # Calculate gravity
+#       x, y, w, h = g.geometry_for(screen)
+#       width      = w / v.size
+#       pos        = x
       
-      v.each do |c|
-         c.resize   = false
-         c.geometry = [ pos, y, width - 2 * border, h - 2 * border ]
-         pos += width
-      end
-   end
-end
+#       v.each do |c|
+#          c.resize   = false
+#          c.geometry = [ pos, y, width - 2 * border, h - 2 * border ]
+#          pos += width
+#       end
+#    end
+# end
