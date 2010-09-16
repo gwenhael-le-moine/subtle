@@ -31,6 +31,8 @@ wicd-client &
 Terminal &
 Terminal &
 
+xbindkeys &
+
 #while true ; do
     subtle
 #done
