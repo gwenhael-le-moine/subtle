@@ -13,7 +13,7 @@ require "/usr/share/subtle/subtle-contrib/ruby/launcher.rb"
 hostname = Socket.gethostname
 
 # == Options
-set :border, 2
+set :border, 1
 set :step, 5
 set :snap, 10
 set :gravity, :center
@@ -21,7 +21,7 @@ set :urgent, true
 set :resize, true
 set :randr, true
 set :padding, [ 0, 0, 0, 0 ]
-set :font, "xft:Envy Code R:pixelsize=12"
+set :font, "xft:Mensch:pixelsize=12"
 set :gap, 0
 
 #
@@ -54,7 +54,7 @@ set :bottom, [ ]
 set :stipple, false
 
 # Separator between sublets
-set :separator, ""
+set :separator, " "
 
 # Outline border size in pixel of panel items
 set :outline, 0
@@ -204,19 +204,19 @@ gravity :gimp_dock,      [ 100,   0,  10, 100 ]
 #
 
 # Switch to view1, view2, ...
-grab "A-F1", :ViewJump1
-grab "A-F2", :ViewJump2
-grab "A-F3", :ViewJump3
-grab "A-F4", :ViewJump4
-grab "A-F5", :ViewJump5
-grab "A-F6", :ViewJump6
-grab "A-F7", :ViewJump7
-grab "A-F8", :ViewJump8
-grab "A-F9", :ViewJump9
+# grab "A-F1", :ViewJump1
+# grab "A-F2", :ViewJump2
+# grab "A-F3", :ViewJump3
+# grab "A-F4", :ViewJump4
+# grab "A-F5", :ViewJump5
+# grab "A-F6", :ViewJump6
+# grab "A-F7", :ViewJump7
+# grab "A-F8", :ViewJump8
+# grab "A-F9", :ViewJump9
 
 # Select next and prev view */
-grab "KP_Add",      :ViewNext
-grab "KP_Subtract", :ViewPrev
+# grab "KP_Add",      :ViewNext
+# grab "KP_Subtract", :ViewPrev
 
 # Move mouse to screen1, screen2, ...
 grab "S-A-F1", :ScreenJump1
