@@ -45,7 +45,7 @@ set :gap, 0
 # [*:separator*] Insert separator
 #
 # Content of the top panel
-set :top, [:views, :spacer, :title, :spacer, :sublets, :spacer, :scratchpad, :tray]
+set :top, [:tray, :views, :spacer, :title, :spacer, :sublets, :spacer, :scratchpad]
 
 # Content of the bottom panel
 set :bottom, [ ]
@@ -57,7 +57,7 @@ set :stipple, false
 set :separator, " "
 
 # Outline border size in pixel of panel items
-set :outline, 0
+set :outline, 1
 
 #
 # == Colors
@@ -74,20 +74,33 @@ set :outline, 0
 # overwritten.
 #
 # Zenburn theme from http://subforge.org/wiki/subtle/Themes
+# color :background,    "#3d3d3d"
+# color :bg_focus,      "#1e2320"
+# color :bg_panel,      "#3f3f3f"
+# color :bg_sublets,    "#3f3f3f"
+# color :bg_urgent,     "#3f3f3f"
+# color :bg_views,      "#3f3f3f"
+# color :border_focus,  "#6f6f6f"
+# color :border_normal, "#3f3f3f"
+# color :border_panel,  "#3f3f3f"
+# color :fg_focus,      "#f0dfaf"
+# color :fg_panel,      "#dcdccc"
+# color :fg_sublets,    "#dcdccc"
+# color :fg_urgent,     "#cc9393"
+# color :fg_views,      "#dcdccc"
+
+# 'merged'
 color :background,    "#3d3d3d"
-color :bg_focus,      "#1e2320"
-color :bg_panel,      "#3f3f3f"
-color :bg_sublets,    "#3f3f3f"
-color :bg_urgent,     "#3f3f3f"
-color :bg_views,      "#3f3f3f"
-color :border_focus,  "#6f6f6f"
-color :border_normal, "#3f3f3f"
-color :border_panel,  "#3f3f3f"
-color :fg_focus,      "#f0dfaf"
-color :fg_panel,      "#dcdccc"
-color :fg_sublets,    "#dcdccc"
-color :fg_urgent,     "#cc9393"
-color :fg_views,      "#dcdccc"
+color :bg_focus,      "#202020"
+color :bg_panel,      "#202020"
+color :bg_sublets,    "#202020"
+color :bg_views,      "#202020"
+color :border_focus,  "#5fd7ff"
+color :border_normal, "#202020"
+color :fg_focus,      "#5fd7ff"
+color :fg_panel,      "#5fd7ff"
+color :fg_sublets,    "#6c6c6c"
+color :fg_views,      "#6c6c6c"
 
 #
 # == Gravities
