@@ -279,7 +279,7 @@ grab "A-Up",    :WindowUp
 grab "A-Right", :WindowRight
 
 # Kill current window
-grab "W-C-q", :WindowKill
+#grab "W-C-q", :WindowKill
 
 # Cycle between given gravities
 grab "W-Up",    [ :top,          :top66,          :top33          ]
