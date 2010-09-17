@@ -261,7 +261,7 @@ grab "A-B3", :WindowResize
 grab "W-A-space", :WindowFloat
 
 # Toggle fullscreen mode of window
-grab "W-F12", :WindowFull
+#grab "W-F12", :WindowFull
 
 # Toggle sticky mode of window (will be visible on all views)
 grab "C-W-s", :WindowStick
