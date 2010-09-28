@@ -454,7 +454,7 @@ end
 
 tag "pdf" do
    match    "apvlv|evince"
-   stick    true
+#   stick    true
    screen   0
 end
 
