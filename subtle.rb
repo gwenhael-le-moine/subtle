@@ -282,15 +282,15 @@ grab "A-Right", :WindowRight
 #grab "W-C-q", :WindowKill
 
 # Cycle between given gravities
-grab "W-Up",    [ :top,          :top66,          :top33          ]
-grab "W-Left",  [ :left,         :left66,         :left33         ]
-grab "W-Right", [ :right,        :right66,        :right33        ]
-grab "W-Down",  [ :bottom,       :bottom66,       :bottom33       ]
-#grab "W-A-q", [ :top_left,     :top_left66,     :top_left33     ]
-#grab "W-A-e", [ :top_right,    :top_right66,    :top_right33    ]
-#grab "W-A-s", [ :center,       :center66,       :center33       ]
-#grab "W-A-z", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
-#grab "W-A-c", [ :bottom_right, :bottom_right66, :bottom_right33 ]
+grab "W-A-8",    [ :top,          :top66,          :top33          ]
+grab "W-A-u",  [ :left,         :left66,         :left33         ]
+grab "W-A-o", [ :right,        :right66,        :right33        ]
+grab "W-A-k",  [ :bottom,       :bottom66,       :bottom33       ]
+grab "W-A-8", [ :top_left,     :top_left66,     :top_left33     ]
+grab "W-A-0", [ :top_right,    :top_right66,    :top_right33    ]
+grab "W-A-i", [ :center,       :center66,       :center33       ]
+grab "W-A-j", [ :bottom_left,  :bottom_left66,  :bottom_left33  ]
+grab "W-A-l", [ :bottom_right, :bottom_right66, :bottom_right33 ]
 
 # Run Ruby lambdas
 grab "S-F2" do |c|
