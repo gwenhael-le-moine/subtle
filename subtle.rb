@@ -452,6 +452,11 @@ tag "browser" do
    # end
 end
 
+tag "sticky" do
+   match "wicd.*"
+   stick true
+end
+
 tag "pdf" do
    match    "apvlv|evince"
 #   stick    true
