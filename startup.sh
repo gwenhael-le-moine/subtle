@@ -18,7 +18,7 @@ setxkbmap -option eurosign:e   # M-e = €
 setxkbmap -option terminate:ctrl_alt_bksp # C-M-⇐ kills X (careful with these...)
 
 #xfsettingsd &
-kdeinit4 &
+#kdeinit4 &
 
 #xcompmgr -C -c &
 gtk-redshift -l 21.05:105.55 &
@@ -32,6 +32,7 @@ Terminal &
 Terminal &
 
 xbindkeys &
+scim -d &
 
 #while true ; do
     subtle
